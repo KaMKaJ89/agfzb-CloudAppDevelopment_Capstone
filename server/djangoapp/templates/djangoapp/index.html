@@ -45,8 +45,33 @@
         </nav>
     </header>
     <main role="main" class="inner cover">
-        <h1>Main index page.</h1>
+        <h1>List of dealers</h1>
         <!--Add a dealer table here -->
+        <table class="table" id="table" data-filter-control="true">
+            <thead>
+                <tr>
+                    <th data-field="id">ID</th>
+                    <th data-field="dealer_name">Dealer Name</th>
+                    <th data-field="city">City</th>
+                    <th data-field="address">Address</th>
+                    <th data-field="zip">Zip</th>
+                    <th data-field="state" data-filter-control="select">State</th>
+                    ...
+                </tr>
+            </thead>
+            <tbody>
+                {% for dealer in dealerships %} 
+                    <tr>
+                        <td>{{dealer.id}}</td>
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id%}">{{dealer.full_name}}</a></td>
+                        <td>{{dealer.city}}</td>
+                        <td>{{dealer.address}}</td>
+                        <td>{{dealer.zip}}</td>
+                        <td>{{dealer.st}}</td>
+                    </tr>
+                {% endfor %} 
+            </tbody>
+        </table>
     </main>
     <footer class="mastfoot mt-auto">
         <p>Full Stack Cloud Development Capstone Project - <a href="https://github.com/KaMKaJ89/agfzb-CloudAppDevelopment_Capstone">GitHub Repo</a>, by <a href="https://github.com/KaMKaJ89">Kamil Kaja</a>.</p>
