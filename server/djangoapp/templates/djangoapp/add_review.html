@@ -5,7 +5,7 @@
     {% load static %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
 </head>
@@ -49,8 +49,8 @@
             <form action="{% url 'djangoapp:add_review' dealer.id%}" method="post">
                 <div class="form-group">
                         <div class="mb-3">
-                            <label for="review"><b>Please write your opinion about selected the dealer: </b></label>
-                            <textarea class="form-control" id="review" name="review" rows="2" required></textarea>
+                            <label for="content"><b>Please write your opinion about selected the dealer: </b></label>
+                            <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="purchasecheck" id="purchasecheck">
@@ -60,26 +60,14 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-4 themed-grid-col">
-                                <label for="car_make"><b>Enter your car make:</b></label>
+                                <label for="car_make"><b>Select your car:</b></label>
                             </div>
                             <div class="col-4 themed-grid-col">
-                                <textarea class="form-control" id="car_make" name="car_make" rows="1"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-4 themed-grid-col">
-                                <label for="car_model"><b>Enter your Car Model:</b></label>
-                            </div>
-                            <div class="col-4 themed-grid-col">
-                                <textarea class="form-control" id="car_model" name="car_model" rows="1"></textarea>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-4 themed-grid-col">
-                                <label for="car_year"><b>Enter your Car Year:</b></label>
-                            </div>
-                            <div class="col-4 themed-grid-col">
-                                <textarea class="form-control" id="car_year" name="car_year" rows="1"></textarea>
+                                <select name="car" id="car" class="form-select" required>
+                                    {% for car in cars %}
+                                        <option selected value={{car.id}}>{{car.model_make.make_name}}-{{car.model_name}}-{{car.model_year|date:"Y" }}</option>
+                                    {% endfor %}
+                               </select>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -87,7 +75,7 @@
                                 <label for="purchase_date"><b>Enter your Purchase Date (mm/dd/yyyy): </b></label>
                             </div>
                             <div class="col-4 themed-grid-col">
-                                <textarea class="form-control" id="purchase_date" name="purchase_date" rows="1"></textarea>
+                                <input class="date-own form-control" type="text" name="purchasedate" id="purchasedate">
                             </div>
                         </div>
                 </div>
@@ -106,6 +94,8 @@
     </footer>
 </body>
 <script type="text/javascript">
-    $('.date-own').datepicker({format: 'mm/dd/yyyy'});
+    $('.date-own').datepicker({
+       format: 'mm/dd/yyyy'
+     });
 </script>
 </html>

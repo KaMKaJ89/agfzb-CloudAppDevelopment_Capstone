@@ -152,12 +152,12 @@ def add_review(request, id):
                 if request.POST["purchasecheck"] == 'on':
                     payload["purchase"] = True
             payload["purchase_date"] = request.POST["purchasedate"]
-            payload["car_make"] = car.make.name
-            payload["car_model"] = car.name
-            payload["car_year"] = int(car.year.strftime("%Y"))
+            payload["car_make"] = car.model_make.make_name
+            payload["car_model"] = car.model_name
+            payload["car_year"] = int(car.model_year.strftime("%Y"))
 
             new_payload = {}
             new_payload["review"] = payload
-            review_post_url =  "https://us-east.functions.appdomain.cloud/api/v1/web/web-dev_2022_djangoserver-space/dealership-package/post-review"
+            review_post_url =  "https://eu-de.functions.appdomain.cloud/api/v1/web/eaeb73bc-f671-455b-8907-d3152f8bc31f/dealership-package/post-review"
             post_request(review_post_url, new_payload, id=id)
         return redirect("djangoapp:dealer_details", id=id)
